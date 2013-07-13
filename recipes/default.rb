@@ -1,14 +1,14 @@
 include_recipe "logrotate"
 
-gem_binaries_path = File.join(rbenv_root, "versions", node.nats_server.ruby.version, "bin")
+gem_binaries_path = File.join(node.rbenv.root_path, "versions", node.nats_server.ruby.version, "bin")
 
 rbenv_gem "nats" do
-  ruby_version node.nats_server.ruby.version
+  rbenv_version node.nats_server.ruby.version
 end
 
-component_name "nats-server"
+component_name = "nats-server"
 
-ruby_path    = File.join(rbenv_root, "versions", node.nats_server.ruby.version, "bin")
+ruby_path    = File.join(node.rbenv.root_path, "versions", node.nats_server.ruby.version, "bin")
 
 config_file  = File.join(node.nats_server.config_dir, "#{component_name}.yml")
 pid_file     = node.nats_server.pid_file
